@@ -1,0 +1,91 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+public class MainActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button MyFridgebtn = (Button) findViewById(R.id.MyFridgebtn);
+        Button Ingredientbtn = (Button) findViewById(R.id.Ingredientbtn);
+        Button Recipebtn = (Button) findViewById(R.id.Recipebtn);
+        Button Userbtn = (Button) findViewById(R.id.Userbtn);
+        Button Revokebtn = (Button) findViewById(R.id.revoke_btn);
+        Button signoutbtn = (Button) findViewById(R.id.signout_btn);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        Revokebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                revokeAccess();
+                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        signoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+        MyFridgebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addFirebase.add_new_data("쌀", "2021");
+                Intent intent = new Intent(getApplicationContext(), MyFridge.class);
+                startActivity(intent);
+            }
+        });
+
+        Ingredientbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), IngredientActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Recipebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RecipeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Userbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+    private void signOut(){
+        FirebaseAuth.getInstance().signOut();
+    }
+    private void revokeAccess(){
+        mAuth.getCurrentUser().delete();
+    }
+}
