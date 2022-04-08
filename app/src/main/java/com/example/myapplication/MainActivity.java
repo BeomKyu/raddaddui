@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         MyFridgebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addFirebase.add_new_data("쌀", "2021");
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
             }
