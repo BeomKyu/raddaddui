@@ -37,7 +37,7 @@ public class IngredientActivity extends AppCompatActivity {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = new Date();
                 try {
-                    date = dateFormat.parse(String.valueOf(timeStamp_Text));
+                    date = dateFormat.parse(timeStamp_Text.getText().toString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
