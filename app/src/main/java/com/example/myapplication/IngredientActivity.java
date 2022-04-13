@@ -11,6 +11,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,8 +34,16 @@ public class IngredientActivity extends AppCompatActivity {
         Registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addFirebase.add_new_ingredient(Ingredient_Text.getText().toString(),
-                        timeStamp_Text.getText().toString());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date();
+                try {
+                    date = dateFormat.parse(String.valueOf(timeStamp_Text));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long time = date.getTime();
+                Timestamp ts = new Timestamp(time);
+                addFirebase.add_new_ingredient(Ingredient_Text.getText().toString(), ts);
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
             }

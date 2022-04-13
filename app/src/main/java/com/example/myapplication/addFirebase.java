@@ -21,7 +21,7 @@ public class addFirebase {
     private static FirebaseAuth user_instance = FirebaseAuth.getInstance();
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public static void add_new_ingredient(String food_name, String time){
+    public static void add_new_ingredient(String food_name, Timestamp time){
         DocumentReference users_ingredient = db.collection("users").document(user_instance.getUid());
         final String TAG="MyTag";
         Map<String, Object> user = new HashMap<>();
