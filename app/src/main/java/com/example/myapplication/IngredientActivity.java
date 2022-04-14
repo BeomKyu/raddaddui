@@ -43,7 +43,7 @@ public class IngredientActivity extends AppCompatActivity {
                 }
                 long time = date.getTime();
                 Timestamp ts = new Timestamp(time);
-                addFirebase.add_new_ingredient(Ingredient_Text.getText().toString(), ts);
+                addFirebase.add_new_ingredient("상품명", Ingredient_Text.getText().toString(), ts);
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
             }
