@@ -25,6 +25,20 @@ public class MainActivity extends AppCompatActivity {
         Button Recipebtn = (Button) findViewById(R.id.Recipebtn);
         Button Userbtn = (Button) findViewById(R.id.Userbtn);
 
+//        Button signoutbtn = (Button) findViewById(R.id.signout_btn);
+//        Button revokebtn = (Button) findViewById(R.id.revoke_btn);
+//        signoutbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                signOut();
+//            }
+//        });
+//        revokebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                revokeAccess();
+//            }
+//        });
         mAuth = FirebaseAuth.getInstance();
 
         MyFridgebtn.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +77,5 @@ public class MainActivity extends AppCompatActivity {
     private void signOut(){
         FirebaseAuth.getInstance().signOut();
     }
-    private void revokeAccess(){
-        mAuth.getCurrentUser().delete();
-    }
+    private void revokeAccess(){ mAuth.getCurrentUser().delete(); }
 }

@@ -34,13 +34,11 @@ public class MyFridge extends AppCompatActivity {
             public void onCallback(List<Map<String, Object>> value) {
 
                 //사용법 value.get(인덱스 번호).get("필드명");
-//                Log.d("MyTag", String.valueOf(value.get(0).get("유통기한")));
-//                test3txt.setText("1:" +value.get(0).get("유통기한").toString());
-//                test4txt.setText("2:" +value.get(1).get("재료명").toString());
-//                test5txt.setText("3:" +value.get(2).get("상품명").toString());
-//                test6txt.setText("4:" +value.get(3).get("유통기한").toString());
-//                test7txt.setText("5:" +value.get(4).get("재료명").toString());
-                Log.d("MyTag", String.valueOf(value.get(0).get("Id")));
+                if(value.size() == 0)
+                    Log.d("MyTag", "null");
+                else{
+
+                }
             }
         });
 

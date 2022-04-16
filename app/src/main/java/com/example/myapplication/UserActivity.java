@@ -18,6 +18,7 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         Button Revokebtn = (Button) findViewById(R.id.revoke_btn);
+        mAuth = FirebaseAuth.getInstance();
 
         Revokebtn.setOnClickListener(new View.OnClickListener() {
             @Override
