@@ -23,30 +23,8 @@ public class MainActivity extends AppCompatActivity {
         Button Ingredientbtn = (Button) findViewById(R.id.Ingredientbtn);
         Button Recipebtn = (Button) findViewById(R.id.Recipebtn);
         Button Userbtn = (Button) findViewById(R.id.Userbtn);
-        Button Revokebtn = (Button) findViewById(R.id.revoke_btn);
-        Button signoutbtn = (Button) findViewById(R.id.signout_btn);
 
         mAuth = FirebaseAuth.getInstance();
-
-        Revokebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                revokeAccess();
-                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        signoutbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
 
         MyFridgebtn.setOnClickListener(new View.OnClickListener() {
             @Override

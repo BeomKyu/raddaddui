@@ -22,10 +22,10 @@
             android:name=".MyFridge"
             android:exported="false" />
         <activity
-            android:name=".LodingActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LodingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
