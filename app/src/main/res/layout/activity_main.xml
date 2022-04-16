@@ -4,38 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffb31f"
+    android:background="#DCDCDC"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-16dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/Userbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="사용자 설정" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/setting" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_marginTop="250dp">
+            android:layout_marginTop="130dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
@@ -43,36 +48,56 @@
                     android:id="@+id/MyFridgebtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:text="나의 냉장고" />
+                    android:paddingHorizontal="80dp"
+                    android:paddingVertical="30dp"
+                    android:background="@drawable/button_outline"
+                    android:drawableTop="@drawable/vegetables"
+                    android:drawablePadding="30dp"
+                    android:fontFamily="@font/heanam"
+                    android:text="나의 냉장고"
+                    android:textColor="#000000"
+                    android:textSize="35dp" />
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/Recipebtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:text="레시피 추천" />
+                    android:layout_marginRight="10dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:background="@drawable/button_outline"
+                    android:drawableLeft="@drawable/recipe_book"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/heanam"
+                    android:text="레시피 \n추천"
+                    android:textSize="17dp"
+                    android:textColor="#111111"/>
 
                 <Button
                     android:id="@+id/Ingredientbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="1"
-                    android:text="재료등록" />
+                    android:layout_gravity="right"
+                    android:padding="10dp"
+                    android:background="@drawable/button_outline"
+                    android:drawableLeft="@drawable/add_to_basket"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/heanam"
+                    android:text="재료등록"
+                    android:textSize="17dp"
+                    android:textColor="#111111"/>
 
             </LinearLayout>
         </LinearLayout>
+
 
     </LinearLayout>
 
