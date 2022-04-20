@@ -34,27 +34,41 @@ public class addFirebase {
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
     static String TAG="MyTag";
 
-    public static void add_new_ingredient(String food_type, String food_name, Timestamp time){
-        DocumentReference users_ingredient = db.collection("users").document(user_instance.getUid());
-
+    public static void add_new_ingredient(String food_type, String food_name, Timestamp time, String Id){
         Map<String, Object> user = new HashMap<>();
         user.put("재료명", food_type);
         user.put("상품명", food_name);
         user.put("유통기한", time);
+        if(Id == null) {
+            db.collection("user").document(user_instance.getUid())
+                    .collection("ingredient").add(user)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "Document Snapshot written with Id");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "Error adding document", e);
+                }
+            });
+        }
+        else{
+            db.collection("user").document(user_instance.getUid())
+                    .collection("ingredient").document(Id).set(user)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
 
-        db.collection("user").document(user_instance.getUid())
-                .collection("ingredient").add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "Document Snapshot written with Id");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "Error adding document", e);
-            }
-        });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
     }
 
     public static void listen_document_multiple(MyCallBack myCallBack){
