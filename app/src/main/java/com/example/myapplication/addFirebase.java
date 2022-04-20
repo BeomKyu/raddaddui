@@ -57,9 +57,6 @@ public class addFirebase {
         });
     }
 
-    public static void read_document_multiple(MyCallBack myCallBack){
-
-    }
     public static void listen_document_multiple(MyCallBack myCallBack){
         List<Map> ingredient_map = new ArrayList<>();
         db.collection("user").document(user_instance.getUid())
@@ -87,23 +84,20 @@ public class addFirebase {
         });
     }
 
-    public void listen_document_local(){
-        final DocumentReference docRef = db.collection("user").document(user_instance.getUid());
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+    public static void delete_user_document(){
+//        Log.d(TAG, user_instance.getUid());
+        db.collection("user")
+                .document(user_instance.getUid())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
-                if(e != null){
-                    Log.w(TAG, "listen failed", e);
-                    return ;
-                }
+            public void onFailure(@NonNull Exception e) {
 
-                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites() ? "Local" : "Server";
-
-                if(snapshot != null && snapshot.exists()){
-                    Log.d(TAG, source + " data : "+ snapshot.getData());
-                }else{
-                    Log.d(TAG, source + " data : null");
-                }
             }
         });
     }

@@ -18,19 +18,32 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         Button Revokebtn = (Button) findViewById(R.id.revoke_btn);
+        Button Signoutbtn = (Button) findViewById(R.id.signout_btn);
         mAuth = FirebaseAuth.getInstance();
 
         Revokebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 revokeAccess();
+                addFirebase.delete_user_document();
+                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        Signoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
                 Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
-
+    private void signOut(){
+        FirebaseAuth.getInstance().signOut();
+    }
     private void revokeAccess(){
         mAuth.getCurrentUser().delete();
     }

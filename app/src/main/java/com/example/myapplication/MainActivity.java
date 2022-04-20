@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void signOut(){
-        FirebaseAuth.getInstance().signOut();
-    }
-    private void revokeAccess(){ mAuth.getCurrentUser().delete(); }
+//    private void signOut(){
+//        FirebaseAuth.getInstance().signOut();
+//    }
+//    private void revokeAccess(){ mAuth.getCurrentUser().delete(); }
 }

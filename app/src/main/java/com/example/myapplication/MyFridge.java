@@ -37,7 +37,7 @@ public class MyFridge extends AppCompatActivity {
                 if(value.size() == 0)
                     Log.d("MyTag", "null");
                 else{
-
+                    Log.d("MyTag", "not null");
                 }
             }
         });
