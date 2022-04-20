@@ -37,6 +37,10 @@ public class MyFridge extends AppCompatActivity {
                 if(value.size() == 0)
                     Log.d("MyTag", "null");
                 else{
+                    test3txt.setText(value.get(0).get("상품명").toString());
+                    test4txt.setText(value.get(0).get("재료명").toString());
+                    test5txt.setText(value.get(0).get("유통기한").toString());
+                    test6txt.setText(value.get(0).get("Id").toString());
                     Log.d("MyTag", "not null");
                 }
             }
