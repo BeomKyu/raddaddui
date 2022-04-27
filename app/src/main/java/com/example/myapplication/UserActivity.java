@@ -24,11 +24,12 @@ public class UserActivity extends AppCompatActivity {
         Revokebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                revokeAccess();
-                addFirebase.delete_user_document();
-                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
-                startActivity(intent);
-                finish();
+                addFirebase.delete_user_all_document();
+//                revokeAccess();
+//                addFirebase.delete_user_document();
+//                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
+//                startActivity(intent);
+//                finish();
             }
         });
         Signoutbtn.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +38,7 @@ public class UserActivity extends AppCompatActivity {
                 signOut();
                 Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         });
     }

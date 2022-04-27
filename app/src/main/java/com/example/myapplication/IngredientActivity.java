@@ -20,6 +20,7 @@ public class IngredientActivity extends AppCompatActivity {
 
     TextView Ingredient_Text;
     TextView timeStamp_Text;
+    TextView Product_Text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class IngredientActivity extends AppCompatActivity {
         Button Registerbtn = (Button) findViewById(R.id.Registerbtn);
         Button Date_picker = (Button) findViewById(R.id.Date_picker);
         Ingredient_Text = (TextView) findViewById(R.id.Ingredient_text);
+        Product_Text = (TextView) findViewById(R.id.Product_name_text);
         timeStamp_Text = (TextView) findViewById(R.id.Expirationdate_text);
         timeStamp_Text.setText(getDate());
 
@@ -43,7 +45,7 @@ public class IngredientActivity extends AppCompatActivity {
                 }
                 long time = date.getTime();
                 Timestamp ts = new Timestamp(time);
-                addFirebase.add_new_ingredient("상품명", Ingredient_Text.getText().toString(), ts, null);
+                addFirebase.add_new_ingredient(Ingredient_Text.getText().toString(), Product_Text.getText().toString(), ts, null);
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
             }
