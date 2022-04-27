@@ -74,7 +74,7 @@ public class addFirebase {
     }
 
     public static void listen_document_multiple(MyCallBack myCallBack){
-        List<Map> ingredient_map = new ArrayList<>();
+//        List<Map> ingredient_map = new ArrayList<>();
         db.collection("user").document(user_instance.getUid())
                 .collection("ingredient")
                 .orderBy("유통기한", Query.Direction.ASCENDING)
@@ -126,12 +126,10 @@ public class addFirebase {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
             }
         });
     }
