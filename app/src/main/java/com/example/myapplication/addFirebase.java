@@ -76,7 +76,7 @@ public class addFirebase {
         }
     }
 
-    public static void listen_document_multiple(MyCallBack myCallBack){
+    public static void listen_document_multiple(MyOnceCallBack myCallBack){
 //        List<Map> ingredient_map = new ArrayList<>();
         db.collection("user").document(user_instance.getUid())
                 .collection("ingredient")

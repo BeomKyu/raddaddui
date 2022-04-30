@@ -24,12 +24,27 @@ public class MyFridge extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_fridge);
 
-        this.IngredientData();
+        IngredientDataList = new ArrayList<IngredientData>();
 
-        ListView listView = (ListView) findViewById(R.id.listview);
+        ListView listView = (ListView) findViewById( R.id.listview);
         final ListViewAdapter listViewAdapter = new ListViewAdapter(this, IngredientDataList);
 
         listView.setAdapter(listViewAdapter);
+
+        addFirebase.listen_document_multiple(new MyOnceCallBack() {
+            @Override
+            public void onCallback(List<Map<String, Object>> value) {
+                for(int i = 0 ; i < value.size(); i++) {
+                    Log.d("MyTag", value.get(i).get("Id").toString());
+
+                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("재료명").toString(), value.get(i).get("유통기한").toString()));
+
+                }
+                listViewAdapter.notifyDataSetChanged();
+            }
+        });
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -38,39 +53,5 @@ public class MyFridge extends AppCompatActivity {
         });
 
     }
-
-    public void IngredientData(){
-        IngredientDataList = new ArrayList<IngredientData>();
-//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"asdasd","dasdas"));
-//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"dsadas","dasdas"));
-//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
-//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
-//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
-//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
-
-        addFirebase.listen_document_multiple_once(new MyOnceCallBack() {
-            @Override
-            public void onCallback(List<Map<String, Object>> value) {
-                for(int i = 0 ; i < value.size(); i++) {
-                    Log.d("MyTag", value.get(i).get("Id").toString());
-
-                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("Id").toString(), "dasdas"));
-                }
-            }
-        });
-        Log.d("MyTag", "1");
-//        addFirebase.listen_document_multiple(new MyCallBack() {
-//            @Override
-//            public void onCallback(List<Map<String, Object>> value) {
-//                //사용법 value.get(인덱스 번호).get("필드명");
-//                if (value.size() == 0){
-//                    Log.d("MyTag", "null");
-//                }else{
-//                    Log.d("MyTag", "not null");
-//                }
-//            }
-//        });
-    }
-
 
 }
