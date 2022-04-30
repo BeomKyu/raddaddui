@@ -29,11 +29,10 @@ public class MyFridge extends AppCompatActivity {
         ListView listView = (ListView) findViewById( R.id.listview);
         final ListViewAdapter listViewAdapter = new ListViewAdapter(this, IngredientDataList);
 
-        listView.setAdapter(listViewAdapter);
-
         addFirebase.listen_document_multiple(new MyOnceCallBack() {
             @Override
             public void onCallback(List<Map<String, Object>> value) {
+                IngredientDataList.clear();
                 for(int i = 0 ; i < value.size(); i++) {
                     Log.d("MyTag", value.get(i).get("Id").toString());
 
@@ -44,6 +43,7 @@ public class MyFridge extends AppCompatActivity {
             }
         });
 
+        listView.setAdapter(listViewAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

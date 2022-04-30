@@ -48,6 +48,7 @@ public class IngredientActivity extends AppCompatActivity {
                 addFirebase.add_new_ingredient(Ingredient_Text.getText().toString(), Product_Text.getText().toString(), ts, null);
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
+                finish();
             }
         });
 
