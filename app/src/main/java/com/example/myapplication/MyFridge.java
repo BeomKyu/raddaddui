@@ -41,20 +41,24 @@ public class MyFridge extends AppCompatActivity {
 
     public void IngredientData(){
         IngredientDataList = new ArrayList<IngredientData>();
-        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"asdasd","dasdas"));
-        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"dsadas","dasdas"));
-        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
-        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
-        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
-        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
+//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"asdasd","dasdas"));
+//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"dsadas","dasdas"));
+//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
+//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
+//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
+//        IngredientDataList.add(new IngredientData(R.drawable.ingredients,"ssss","dasdas"));
 
         addFirebase.listen_document_multiple_once(new MyOnceCallBack() {
             @Override
             public void onCallback(List<Map<String, Object>> value) {
-                for(int i = 0 ; i < value.size(); i++)
+                for(int i = 0 ; i < value.size(); i++) {
                     Log.d("MyTag", value.get(i).get("Id").toString());
+
+                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("Id").toString(), "dasdas"));
+                }
             }
         });
+        Log.d("MyTag", "1");
 //        addFirebase.listen_document_multiple(new MyCallBack() {
 //            @Override
 //            public void onCallback(List<Map<String, Object>> value) {

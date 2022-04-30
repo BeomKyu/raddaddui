@@ -120,7 +120,7 @@ public class addFirebase {
                                 map.put("재료명", document.getString("재료명"));
                                 map.put("상품명", document.getString("상품명"));
                                 map.put("Id", document.getId());
-                                Log.d(TAG, String.valueOf(document.getData()));
+//                                Log.d(TAG, String.valueOf(document.getData()));
                                 list.add(map);
                             }
                             myOnceCallBack.onCallback(list);
