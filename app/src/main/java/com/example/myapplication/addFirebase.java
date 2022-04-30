@@ -31,6 +31,9 @@ import java.util.Map;
 interface MyCallBack{
     void onCallback(List<Map<String, Object>> value);
 }
+interface MyOnceCallBack{
+    void onCallback(List<Map<String, Object>> value);
+}
 public class addFirebase {
     private static FirebaseAuth user_instance = FirebaseAuth.getInstance();
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -98,6 +101,35 @@ public class addFirebase {
                 myCallBack.onCallback(list);
             }
         });
+    }
+
+    public static void listen_document_multiple_once(MyOnceCallBack myOnceCallBack){
+//        List<Map<String, Object>> list = new ArrayList<>();
+        db.collection("user").document(user_instance.getUid())
+                .collection("ingredient")
+                .orderBy("유통기한", Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            List<Map<String, Object>> list = new ArrayList<>();
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("유통기한", document.getDate("유통기한"));
+                                map.put("재료명", document.getString("재료명"));
+                                map.put("상품명", document.getString("상품명"));
+                                map.put("Id", document.getId());
+                                Log.d(TAG, String.valueOf(document.getData()));
+                                list.add(map);
+                            }
+                            myOnceCallBack.onCallback(list);
+                        }
+                        else{
+                            myOnceCallBack.onCallback(null);
+                        }
+                    }
+                });
     }
 
     public static void delete_user_all_document(){
