@@ -40,6 +40,7 @@ public class ListViewAdapter extends BaseAdapter {
     public View getView(int position, View converView, ViewGroup parent) {
         View view = mLayoutInflater.inflate(R.layout.list_view, null);
 
+        //카테고리, 수량, 보관위치, 구매일자 추가
         ImageView imageView = (ImageView)view.findViewById(R.id.img);
         TextView movieName = (TextView)view.findViewById(R.id.trademark);
         TextView grade = (TextView)view.findViewById(R.id.expirationdate);
