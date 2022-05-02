@@ -33,7 +33,7 @@
                 android:id="@+id/Ingredient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="재료명"
+                android:text="카테고리"
                 android:textColor="#111111"
                 android:textSize="30dp" />
 

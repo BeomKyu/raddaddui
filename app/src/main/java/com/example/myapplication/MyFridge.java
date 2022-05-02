@@ -33,23 +33,24 @@ public class MyFridge extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listview);
         final ListViewAdapter listViewAdapter = new ListViewAdapter(this, IngredientDataList);
 
+        listView.setAdapter(listViewAdapter);
+
         addFirebase.listen_document_multiple(new MyOnceCallBack() {
             @Override
             public void onCallback(List<Map<String, Object>> value) {
                 IngredientDataList.clear();
                 for (int i = 0; i < value.size(); i++) {
-                    //Log.d("MyTag", value.get(i).get("Id").toString());
+                    Log.d("MyTag", value.get(i).get("Id").toString());
 
                     String expirationdate = simpleDateFormat.format(value.get(i).get("유통기한"));
 
-                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("재료명").toString(), expirationdate));
+                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("카테고리").toString(), expirationdate));
 
                 }
                 listViewAdapter.notifyDataSetChanged();
             }
         });
 
-        listView.setAdapter(listViewAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
