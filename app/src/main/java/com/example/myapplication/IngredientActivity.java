@@ -4,11 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.sql.Timestamp;
@@ -18,58 +24,117 @@ import java.util.Date;
 
 public class IngredientActivity extends AppCompatActivity {
 
-    TextView Ingredient_Text;
-    TextView timeStamp_Text;
-    TextView Product_Text;
+    String category; //카테고리
+    String storpos; //저장위치
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredient);
 
-        Button Registerbtn = (Button) findViewById(R.id.Registerbtn);
-        Button Date_picker = (Button) findViewById(R.id.Date_picker);
-        Ingredient_Text = (TextView) findViewById(R.id.Ingredient_text);
-        Product_Text = (TextView) findViewById(R.id.Product_name_text);
-        timeStamp_Text = (TextView) findViewById(R.id.Expirationdate_text);
-        timeStamp_Text.setText(getDate());
+        Button Registerbtn = (Button) findViewById(R.id.Registerbtn);  //틍록하기
+        ImageButton Buy_date_picker = (ImageButton) findViewById(R.id.buy_date_picker); //구매날짜달력
+        ImageButton Epd_Date_picker = (ImageButton) findViewById(R.id.epd_Date_picker); //유통기한달력 
+        Spinner Category = (Spinner) findViewById(R.id.category);  //카테고리스피너
+        EditText Tradeame = (EditText) findViewById(R.id.tradename); //상품명
+        RadioGroup StoragePos = (RadioGroup) findViewById(R.id.storagepos); //보관위치
+        EditText Buydate = (EditText) findViewById(R.id.buydate); //구매날짜
+        EditText Expirationdate = (EditText)findViewById(R.id.expirationdate); //유통기한 
 
+        Buydate.setText(getDate()); //구매일자 초기 날짜
+        Expirationdate.setText(getDate()); //유통기한 초기 날짜
+
+        //카테고리
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Category.setAdapter(adapter);
+
+        Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ((TextView)adapterView.getChildAt(0)).setTextColor(Color.BLACK);
+                category = adapterView.getItemAtPosition(i).toString(); //선택된 값 가져오기
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        //보관위치
+        StoragePos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.cold){
+                    //냉장
+                    storpos = "냉장";
+                }else {
+                    //냉동
+                    storpos = "냉동";
+                }
+            }
+        });
+        
+        //달력다이얼로그
+        //구매날짜달력
+        DatePickerDialog.OnDateSetListener buydateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Buydate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+            }
+
+        };
+
+        DatePickerDialog buydatePickerDialog = new DatePickerDialog(this, buydateSetListener, 2022, 1, 1);
+
+        Buy_date_picker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buydatePickerDialog.show();
+            }
+        });
+
+        //유통기한날짜달력
+        DatePickerDialog.OnDateSetListener epddateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Expirationdate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+            }
+
+        };
+
+        DatePickerDialog epddatePickerDialog = new DatePickerDialog(this, epddateSetListener, 2022, 1, 1);
+
+        Epd_Date_picker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                epddatePickerDialog.show();
+            }
+        });
+
+
+        //등록하기 버튼
         Registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = new Date();
                 try {
-                    date = dateFormat.parse(timeStamp_Text.getText().toString());
+                    date = dateFormat.parse(Expirationdate.getText().toString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 long time = date.getTime();
                 Timestamp ts = new Timestamp(time);
-                addFirebase.add_new_ingredient(Ingredient_Text.getText().toString(), Product_Text.getText().toString(), ts,
-                        null, ts, 0, "냉장");
+                addFirebase.add_new_ingredient(Expirationdate.getText().toString(), Tradeame.getText().toString(), ts, null);
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
                 finish();
             }
         });
-
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                timeStamp_Text.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-            }
-        };
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, dateSetListener, 2022, 1, 1);
-
-        Date_picker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePickerDialog.show();
-            }
-        });
-
     }
 
     private String getDate() {

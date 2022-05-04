@@ -10,100 +10,195 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="재료등록"
-            android:textColor="#111111"
-            android:textSize="50dp"/>
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="90dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/camera"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="상품명"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/heanam"
+                    android:textColor="#111111"/>
+
+                <EditText
+                    android:id="@+id/tradename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="15"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
 
             <TextView
-                android:id="@+id/Ingredient"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:text="카테고리"
                 android:textColor="#111111"
+                android:fontFamily="@font/heanam"
                 android:textSize="30dp" />
 
-            <EditText
-                android:id="@+id/Ingredient_text"
+            <Spinner
+                android:id="@+id/category"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#111111"
-                android:inputType="textPersonName"
-                android:text="" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/Product_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="상품명"
-                android:textColor="#111111"
-                android:textSize="30dp" />
-
-            <EditText
-                android:id="@+id/Product_name_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="#111111"
-                android:inputType="textPersonName"
-                android:text="" />
+                android:layout_height="match_parent"
+                android:textColor="#111111"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/Expirationdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="유통기한"
-                android:textColor="#111111"
-                android:textSize="30dp" />
-
-            <EditText
-                android:id="@+id/Expirationdate_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:enabled="false"
-                android:textColor="#111111"
-                android:inputType="textPersonName" />
-            <Button
-                android:id="@+id/Date_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/Registerbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="등록하기" />
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="보관위치"
+                android:textColor="#111111"
+                android:fontFamily="@font/heanam"
+                android:textSize="30dp" />
+
+            <RadioGroup
+                android:id="@+id/storagepos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/cold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:text="냉장"
+                    android:textColor="#111111"/>
+
+                <RadioButton
+                    android:id="@+id/freeze"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="냉동"
+                    android:textColor="#111111"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="구매날짜"
+                android:textColor="#111111"
+                android:fontFamily="@font/heanam"
+                android:textSize="30dp" />
+
+            <EditText
+                android:id="@+id/buydate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ems="11"
+                android:enabled="false"
+                android:textColor="#111111"/>
+
+            <ImageButton
+                android:id="@+id/buy_date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="7dp"
+                android:layout_gravity="center"
+                android:background= "#00ff0000"
+                android:src="@drawable/calendar"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="유통기한"
+                android:textColor="#111111"
+                android:fontFamily="@font/heanam"
+                android:textSize="30dp" />
+
+            <EditText
+                android:id="@+id/expirationdate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ems="11"
+                android:enabled="false"
+                android:textColor="#111111"/>
+
+            <ImageButton
+                android:id="@+id/epd_Date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="7dp"
+                android:layout_gravity="center"
+                android:background= "#00ff0000"
+                android:src="@drawable/calendar"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:id="@+id/Registerbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="#111111"
+                android:background="@drawable/button_outline"
+                android:fontFamily="@font/heanam"
+                android:textSize="30dp"
+                android:text="등록하기" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

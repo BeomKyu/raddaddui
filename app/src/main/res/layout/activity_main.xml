@@ -77,7 +77,7 @@
                     android:drawableLeft="@drawable/recipe_book"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/heanam"
-                    android:text="레시피 \n추천"
+                    android:text="레시피 \n검색"
                     android:textSize="17dp"
                     android:textColor="#111111"/>
 
