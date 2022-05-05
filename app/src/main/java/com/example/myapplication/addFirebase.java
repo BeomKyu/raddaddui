@@ -42,14 +42,13 @@ public class addFirebase {
 
     public static void add_new_ingredient(String food_type, String food_name,
                                           Timestamp expiration_date, String Id,
-                                          Timestamp purchase_date, int amount,
+                                          Timestamp purchase_date,
                                           String storage_location){
         Map<String, Object> user = new HashMap<>();
         user.put("카테고리", food_type);
         user.put("상품명", food_name);
         user.put("유통기한", expiration_date);
         user.put("구매일자", purchase_date);
-        user.put("수량", amount);
         user.put("보관위치", storage_location);
 
         if(Id == null) {
@@ -97,22 +96,13 @@ public class addFirebase {
                     return ;
                 }
                 List<Map<String, Object>> list = new ArrayList<>();
-                Log.d(TAG, "aaaaaaa");
                 for(QueryDocumentSnapshot doc : value){
                     Map<String, Object> map = new HashMap<>();
-                    Log.d(TAG, "1aaaaaaa");
                     map.put("유통기한", doc.getDate("유통기한"));
-                    Log.d(TAG, "2aaaaaaa");
                     map.put("카테고리", doc.getString("카테고리"));
-                    Log.d(TAG, "3aaaaaaa");
                     map.put("상품명", doc.getString("상품명"));
-                    Log.d(TAG, "4aaaaaaa");
                     map.put("Id", doc.getId());
-                    Log.d(TAG, "5aaaaaaa");
                     map.put("구매일자", doc.getDate("구매일자"));
-                    Log.d(TAG, "6aaaaaaa");
-                    map.put("수량", doc.get("수량"));
-                    Log.d(TAG, "7aaaaaaa");
                     map.put("보관위치", doc.getString("보관위치"));
                     Log.d(TAG, String.valueOf(doc.getData()));
                     list.add(map);
@@ -140,7 +130,6 @@ public class addFirebase {
                                 map.put("상품명", document.getString("상품명"));
                                 map.put("Id", document.getId());
                                 map.put("구매일자", document.getDate("구매일자"));
-                                map.put("수량", document.getString("수량"));
                                 map.put("보관위치", document.getString("보관위치"));
 //                                Log.d(TAG, String.valueOf(document.getData()));
                                 list.add(map);

@@ -121,15 +121,19 @@ public class IngredientActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = new Date();
+                Date date1 = new Date();
+                Date date2 = new Date();
                 try {
-                    date = dateFormat.parse(Expirationdate.getText().toString());
+                    date1 = dateFormat.parse(Expirationdate.getText().toString());
+                    date2 = dateFormat.parse(Buydate.getText().toString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                long time = date.getTime();
-                Timestamp ts = new Timestamp(time);
-                addFirebase.add_new_ingredient(Expirationdate.getText().toString(), Tradeame.getText().toString(), ts, null);
+                long time1 = date1.getTime();
+                long time2 = date2.getTime();
+                Timestamp ts1 = new Timestamp(time1);
+                Timestamp ts2 = new Timestamp(time2);
+                addFirebase.add_new_ingredient(category, Tradeame.getText().toString(), ts1, null, ts2, storpos);
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
                 finish();
