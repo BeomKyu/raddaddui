@@ -22,6 +22,23 @@
             android:text="레시피 추천"
             android:textSize="50dp" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/receipe_serch_txt"
+            android:text="요리 이름을 검색하세요"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/receipe_serch"
+            android:text="검색"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/receipe_serched_txt"
+            android:text="결과값"/>
+
 
     </LinearLayout>
 
