@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.AsyncTask;
+import android.text.Editable;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -12,9 +13,7 @@ import java.net.URL;
 
 public class Task extends AsyncTask<String, Void, String> {
 
-    String clientKey = "##";
     private String str, receiveMsg;
-    private final String ID = "##";
     @Override
     protected String doInBackground(String... strings) {
         URL url = null;

@@ -35,7 +35,6 @@ public class RecipeActivity extends AppCompatActivity {
         serch_btn = (Button)findViewById(R.id.receipe_serch);
         serch_txt = (EditText)findViewById(R.id.receipe_serch_txt);
         serched_txt = (TextView)findViewById(R.id.receipe_serched_txt);
-
         serch_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,10 +42,10 @@ public class RecipeActivity extends AppCompatActivity {
             }
         });
 
-
     }
     //아직 요리명으로 찾는것까지는 구현 못했어요
     private void serch_receipe_with_txt(){
+        rcpList = new ArrayList();
         try{
             resultTxt = new Task().execute().get();
         } catch (InterruptedException e) {
@@ -56,7 +55,6 @@ public class RecipeActivity extends AppCompatActivity {
         }
         jsonParsing(resultTxt);
         Log.d("MYTAG", String.valueOf(rcpList.size()));
-        serched_txt.setText(rcpList.get(0).getRCP_NM() + rcpList.get(0).getRCP_PARTS_DTLS());
     }
 
     private void jsonParsing(String json){
