@@ -58,7 +58,6 @@ public class RecipeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 serch_receipe_with_txt();
                 if(rcpList.size() != 0){
-
                 }
             }
         });

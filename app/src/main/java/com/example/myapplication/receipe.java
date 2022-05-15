@@ -13,6 +13,7 @@ public class receipe {
     private String RCP_NM;
     private String[] MANUAL = new String[20];
     private String ATT_FILE_NO_MAIN;
+    private String ATT_FILE_NO_MK;
 
     public receipe(JSONObject jsonObject){
         try {
@@ -27,6 +28,7 @@ public class receipe {
                 this.MANUAL[i] = jsonObject.getString("MANUAL" + (i+1));
             }
             this.ATT_FILE_NO_MAIN = jsonObject.getString("ATT_FILE_NO_MAIN");
+            this.ATT_FILE_NO_MK = jsonObject.getString("ATT_FILE_NO_MK");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -47,5 +49,8 @@ public class receipe {
     }
     public String getATT_FILE_NO_MAIN(){
         return ATT_FILE_NO_MAIN;
+    }
+    public String getATT_FILE_NO_MK(){
+        return ATT_FILE_NO_MK;
     }
 }
