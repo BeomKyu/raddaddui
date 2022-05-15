@@ -3,6 +3,8 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,9 +23,9 @@ public class RecipeActivity extends AppCompatActivity {
 
     Button serch_btn;
     EditText serch_txt;
-    TextView serched_txt;
-    //json_to_String
+    public TextView serched_txt;
     String resultTxt = "";
+    Boolean aBoolean = false;
 
     List<receipe> rcpList = new ArrayList();
 
@@ -35,19 +37,42 @@ public class RecipeActivity extends AppCompatActivity {
         serch_btn = (Button)findViewById(R.id.receipe_serch);
         serch_txt = (EditText)findViewById(R.id.receipe_serch_txt);
         serched_txt = (TextView)findViewById(R.id.receipe_serched_txt);
+        serch_txt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                aBoolean = true;
+            }
+        });
         serch_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 serch_receipe_with_txt();
+                if(rcpList.size() != 0){
+
+                }
             }
         });
 
     }
-    //아직 요리명으로 찾는것까지는 구현 못했어요
+
     private void serch_receipe_with_txt(){
         rcpList = new ArrayList();
         try{
-            resultTxt = new Task().execute().get();
+            if(aBoolean) {
+                resultTxt = new Task(serch_txt.getText().toString()).execute().get();
+            }
+            else
+                resultTxt = new Task(null).execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -64,7 +89,6 @@ public class RecipeActivity extends AppCompatActivity {
             JSONObject rcpObject = jsonObject.getJSONObject("COOKRCP01");
             JSONObject infoObject = rcpObject.getJSONObject("RESULT");
             Log.d("MYTAG", infoObject.getString("CODE"));
-            Log.d("MYTAG", rcpObject.getString("total_count"));
             if(infoObject.getString("CODE").equals("INFO-000")){
                 JSONArray rcpArray = rcpObject.getJSONArray("row");
                 for(int i = 0; i < rcpArray.length(); i++){
