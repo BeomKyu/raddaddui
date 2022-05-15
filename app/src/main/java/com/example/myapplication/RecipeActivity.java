@@ -23,7 +23,7 @@ public class RecipeActivity extends AppCompatActivity {
 
     Button serch_btn;
     EditText serch_txt;
-    public TextView serched_txt;
+    TextView serched_txt;
     String resultTxt = "";
     Boolean aBoolean = false;
 
@@ -37,6 +37,7 @@ public class RecipeActivity extends AppCompatActivity {
         serch_btn = (Button)findViewById(R.id.receipe_serch);
         serch_txt = (EditText)findViewById(R.id.receipe_serch_txt);
         serched_txt = (TextView)findViewById(R.id.receipe_serched_txt);
+
         serch_txt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -58,6 +59,7 @@ public class RecipeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 serch_receipe_with_txt();
                 if(rcpList.size() != 0){
+                    serched_txt.setText(rcpList.get(0).getRCP_NM());
                 }
             }
         });
