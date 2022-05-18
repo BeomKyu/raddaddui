@@ -24,8 +24,12 @@ public class Task extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         URL url = null;
         try{
-            url = new URL("https://openapi.foodsafetykorea.go.kr/api/0d01938551d64498a2db/COOKRCP01/json/6/10/");
-
+            if(this.rcp_nm != null) {
+                url = new URL("https://openapi.foodsafetykorea.go.kr/api/0d01938551d64498a2db/COOKRCP01/json/1/10/RCP_NM=" + this.rcp_nm);
+                Log.d("MYTAG", this.rcp_nm);
+            }
+            else
+                url = new URL("https://openapi.foodsafetykorea.go.kr/api/0d01938551d64498a2db/COOKRCP01/json/1/10/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Accept", "application/json");
 
