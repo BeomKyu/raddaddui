@@ -44,7 +44,7 @@ public class MyFridge extends AppCompatActivity {
 
                     String expirationdate = simpleDateFormat.format(value.get(i).get("유통기한"));
 
-                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("카테고리").toString(), expirationdate));
+                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate));
 
                 }
                 listViewAdapter.notifyDataSetChanged();

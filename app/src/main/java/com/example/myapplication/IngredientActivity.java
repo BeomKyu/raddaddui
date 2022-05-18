@@ -43,6 +43,7 @@ public class IngredientActivity extends AppCompatActivity {
 
         Buydate.setText(getDate()); //구매일자 초기 날짜
         Expirationdate.setText(getDate()); //유통기한 초기 날짜
+        Tradeame.setTextColor(Color.BLACK);
 
         //카테고리
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);

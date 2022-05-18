@@ -13,15 +13,6 @@
         android:orientation="vertical">
 
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
-            android:gravity="center"
-            android:text="레시피 추천"
-            android:textSize="50dp" />
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,11 +23,11 @@
             android:id="@+id/receipe_serch"
             android:text="검색"
             />
-        <TextView
+
+        <ListView
+            android:id="@+id/receipe_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/receipe_serched_txt"
-            android:text="결과값"/>
+            android:layout_height="match_parent"/>
 
 
     </LinearLayout>

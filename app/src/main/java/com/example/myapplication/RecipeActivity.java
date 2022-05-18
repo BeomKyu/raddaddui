@@ -3,17 +3,22 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.telephony.ims.RcsUceAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.protobuf.StringValue;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,20 +28,26 @@ public class RecipeActivity extends AppCompatActivity {
 
     Button serch_btn;
     EditText serch_txt;
-    TextView serched_txt;
     String resultTxt = "";
     Boolean aBoolean = false;
-
+    TextView textView123;
     List<receipe> rcpList = new ArrayList();
+    ArrayList<IngredientData> RecipeDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
+        RecipeDataList = new ArrayList<IngredientData>();
+
+        ListView receipe_listView = (ListView) findViewById(R.id.receipe_listview);
+        final ReceipeListViewAdapter listViewAdapter = new ReceipeListViewAdapter(this, RecipeDataList);
+
+        receipe_listView.setAdapter(listViewAdapter);
         serch_btn = (Button)findViewById(R.id.receipe_serch);
         serch_txt = (EditText)findViewById(R.id.receipe_serch_txt);
-        serched_txt = (TextView)findViewById(R.id.receipe_serched_txt);
+
 
         serch_txt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -57,9 +68,10 @@ public class RecipeActivity extends AppCompatActivity {
         serch_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                RecipeDataList.clear();
                 serch_receipe_with_txt();
-                if(rcpList.size() != 0){
-                    serched_txt.setText(rcpList.get(0).getRCP_NM());
+                for(int i = 0; i < rcpList.size(); i++){
+                    RecipeDataList.add(new IngredientData(R.drawable.ingredients, rcpList.get(i).getRCP_NM()));
                 }
             }
         });
