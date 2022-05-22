@@ -36,12 +36,12 @@ public class IngredientActivity extends AppCompatActivity {
 
     String category; //카테고리
     String storpos; //저장위치
-    ImageButton camera_btn;
-    File file;
+    ImageButton camera_btn; //카메라 버튼 및 이미지 미리보기 뷰
 
     final static int TAKE_PICTURE = 1;
 
     final static int REQUEST_TAKE_PHOTO = 1;
+    private boolean imageChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,8 +152,8 @@ public class IngredientActivity extends AppCompatActivity {
                 long time2 = date2.getTime();
                 Timestamp ts1 = new Timestamp(time1);
                 Timestamp ts2 = new Timestamp(time2);
-                addFirebase.add_new_ingredient(category, Tradeame.getText().toString(), ts1, null, ts2, storpos);
-                addFirebase.add_picture(camera_btn);
+                addFirebase.add_new_ingredient(category, Tradeame.getText().toString(), ts1, null, ts2, storpos, imageChanged, camera_btn);
+
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
                 finish();
@@ -186,7 +186,9 @@ public class IngredientActivity extends AppCompatActivity {
         if(requestCode == 0 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            camera_btn.setImageBitmap(imageBitmap); }
+            camera_btn.setImageBitmap(imageBitmap);
+            imageChanged = true;
+        }
     }
 
 }

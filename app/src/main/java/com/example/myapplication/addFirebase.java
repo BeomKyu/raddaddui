@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +29,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,10 +52,14 @@ public class addFirebase {
     static FirebaseStorage storage = FirebaseStorage.getInstance();
     static String TAG="MyTag";
 
-    public static void add_new_ingredient(String food_type, String food_name,
-                                          Timestamp expiration_date, String Id,
-                                          Timestamp purchase_date,
-                                          String storage_location){
+    static String tempId;
+
+    public static String add_new_ingredient(String food_type, String food_name,
+                                            Timestamp expiration_date, String Id,
+                                            Timestamp purchase_date,
+                                            String storage_location, boolean imageChanged,
+                                            ImageButton camera_btn){
+
         Map<String, Object> user = new HashMap<>();
         user.put("카테고리", food_type);
         user.put("상품명", food_name);
@@ -64,7 +73,9 @@ public class addFirebase {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "Document Snapshot written with Id");
+                            if(imageChanged)
+                                add_picture(camera_btn, documentReference.getId());
+                            Log.d("aaa", "Document Snapshot written with Id " + documentReference.getId());
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -88,6 +99,7 @@ public class addFirebase {
                 }
             });
         }
+        return tempId;
     }
 
     public static void listen_document_multiple(MyOnceCallBack myCallBack){
@@ -203,13 +215,36 @@ public class addFirebase {
         });
     }
 
-    public static void add_picture(ImageButton camera_btn) {
+    public static void add_picture(ImageView camera_btn, String id) {
         StorageReference storageRef = storage.getReference();
-
+        Log.d(TAG, "id" + id);
 // Create a reference to "mountains.jpg"
-        StorageReference mountainsRef = storageRef.child("mountains.jpg");
+        StorageReference imageRef = storageRef.child(user_instance.getUid() + "/" + id + ".jpg");
+        camera_btn.setDrawingCacheEnabled(true);
+        camera_btn.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) camera_btn.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
 
-// Create a reference to 'images/mountains.jpg'
-        StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
+        UploadTask uploadTask = imageRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+
+                Log.d(TAG, "fail");
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG, "success");
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+            }
+        });
+        // [END upload_memory]
+
+
     }
 }
