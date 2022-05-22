@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class IngredientActivity extends AppCompatActivity {
         Spinner Category = (Spinner) findViewById(R.id.category);  //카테고리스피너
         EditText Tradeame = (EditText) findViewById(R.id.tradename); //상품명
         RadioGroup StoragePos = (RadioGroup) findViewById(R.id.storagepos); //보관위치
+        RadioButton coldbtn = (RadioButton)findViewById(R.id.cold); //냉장
         EditText Buydate = (EditText) findViewById(R.id.buydate); //구매날짜
         EditText Expirationdate = (EditText)findViewById(R.id.expirationdate); //유통기한
 
@@ -82,6 +84,9 @@ public class IngredientActivity extends AppCompatActivity {
         });
 
         //보관위치
+        if (coldbtn.isChecked() == true){
+            storpos = "냉장";
+        }
         StoragePos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
