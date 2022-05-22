@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.ims.RcsUceAdapter;
 import android.text.Editable;
@@ -45,9 +46,10 @@ public class RecipeActivity extends AppCompatActivity {
         final ReceipeListViewAdapter listViewAdapter = new ReceipeListViewAdapter(this, RecipeDataList);
 
         receipe_listView.setAdapter(listViewAdapter);
+
         serch_btn = (Button)findViewById(R.id.receipe_serch);
         serch_txt = (EditText)findViewById(R.id.receipe_serch_txt);
-
+        serch_txt.setTextColor(Color.BLACK);
 
         serch_txt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -65,6 +67,7 @@ public class RecipeActivity extends AppCompatActivity {
                 aBoolean = true;
             }
         });
+
         serch_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
