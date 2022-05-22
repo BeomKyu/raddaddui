@@ -12,17 +12,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/receipe_serch_txt"/>
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/receipe_serch"
-            android:text="검색"
-            />
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/receipe_serch_txt"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/receipe_serch"
+                android:text="검색"/>
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/receipe_listview"
