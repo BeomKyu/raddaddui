@@ -4,12 +4,15 @@ public class IngredientData {
     private int img;
     private String trademark ;
     private String expirationdate;
-    private String title ;
+    private String title;
+    private String userId;
 
-    public IngredientData(int img, String trademark, String expirationdate){
+
+    public IngredientData(int img, String trademark, String expirationdate, String userId){
         this.img = img;
         this.trademark  = trademark;
         this.expirationdate = expirationdate;
+        this.userId = userId;
     }
 
     public IngredientData(int img, String title){
@@ -41,5 +44,9 @@ public class IngredientData {
     public String getExpirationdate()
     {
         return this.expirationdate;
+    }
+
+    public String getUserId(){
+        return  this.userId;
     }
 }

@@ -41,6 +41,8 @@ public class ListViewAdapter extends BaseAdapter {
     public View getView(int position, View converView, ViewGroup parent) {
         View view = mLayoutInflater.inflate(R.layout.list_view, null);
 
+        String userID;
+
         //카테고리, 수량, 보관위치, 구매일자 추가
         ImageView imageView = (ImageView)view.findViewById(R.id.img);
         TextView movieName = (TextView)view.findViewById(R.id.trademark);
@@ -51,10 +53,12 @@ public class ListViewAdapter extends BaseAdapter {
         movieName.setText(dataArrayList.get(position).getTrademark());
         grade.setText(dataArrayList.get(position).getExpirationdate());
 
+        userID = dataArrayList.get(position).getUserId();
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                addFirebase.delete_one_ingredient_document(userID);
             }
         });
 

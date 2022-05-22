@@ -52,7 +52,7 @@ public class MyFridge extends AppCompatActivity {
                                 String expirationdate = simpleDateFormat.format(value.get(i).get("유통기한"));
 
                                 if(value.get(i).get("보관위치").toString().equals("냉장")){
-                                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate));
+                                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate, value.get(i).get("Id").toString()));
                                 }
                                 //IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate));
 
@@ -71,7 +71,7 @@ public class MyFridge extends AppCompatActivity {
                                 String expirationdate = simpleDateFormat.format(value.get(i).get("유통기한"));
 
                                 if(value.get(i).get("보관위치").toString().equals("냉동")){
-                                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate));
+                                    IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate, value.get(i).get("Id").toString()));
                                 }
                                 //IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate));
 
@@ -94,7 +94,7 @@ public class MyFridge extends AppCompatActivity {
                         String expirationdate = simpleDateFormat.format(value.get(i).get("유통기한"));
 
                         if(value.get(i).get("보관위치").toString().equals("냉장")){
-                            IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate));
+                            IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate, value.get(i).get("Id").toString()));
                         }
                         //IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate));
 
