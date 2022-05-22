@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,10 +45,18 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView imageView = (ImageView)view.findViewById(R.id.img);
         TextView movieName = (TextView)view.findViewById(R.id.trademark);
         TextView grade = (TextView)view.findViewById(R.id.expirationdate);
+        Button delete = (Button)view.findViewById(R.id.delete);
 
         imageView.setImageResource(dataArrayList.get(position).getImg());
         movieName.setText(dataArrayList.get(position).getTrademark());
         grade.setText(dataArrayList.get(position).getExpirationdate());
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         return view;
     }
