@@ -99,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="50dp"
                     android:text="냉장"
+                    android:checked="true"
                     android:textColor="#111111"/>
 
                 <RadioButton
