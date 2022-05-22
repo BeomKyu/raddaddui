@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -22,12 +24,16 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicMarkableReference;
+
 interface MyCallBack{
     void onCallback(List<Map<String, Object>> value);
 }
@@ -38,6 +44,7 @@ interface MyOnceCallBack{
 public class addFirebase {
     private static FirebaseAuth user_instance = FirebaseAuth.getInstance();
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    static FirebaseStorage storage = FirebaseStorage.getInstance();
     static String TAG="MyTag";
 
     public static void add_new_ingredient(String food_type, String food_name,
@@ -196,4 +203,13 @@ public class addFirebase {
         });
     }
 
+    public static void add_picture(ImageButton camera_btn) {
+        StorageReference storageRef = storage.getReference();
+
+// Create a reference to "mountains.jpg"
+        StorageReference mountainsRef = storageRef.child("mountains.jpg");
+
+// Create a reference to 'images/mountains.jpg'
+        StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
+    }
 }

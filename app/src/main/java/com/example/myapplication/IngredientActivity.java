@@ -1,11 +1,20 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +26,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +36,12 @@ public class IngredientActivity extends AppCompatActivity {
 
     String category; //카테고리
     String storpos; //저장위치
+    ImageButton camera_btn;
+    File file;
+
+    final static int TAKE_PICTURE = 1;
+
+    final static int REQUEST_TAKE_PHOTO = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +55,9 @@ public class IngredientActivity extends AppCompatActivity {
         EditText Tradeame = (EditText) findViewById(R.id.tradename); //상품명
         RadioGroup StoragePos = (RadioGroup) findViewById(R.id.storagepos); //보관위치
         EditText Buydate = (EditText) findViewById(R.id.buydate); //구매날짜
-        EditText Expirationdate = (EditText)findViewById(R.id.expirationdate); //유통기한 
+        EditText Expirationdate = (EditText)findViewById(R.id.expirationdate); //유통기한
+
+        camera_btn = (ImageButton)findViewById(R.id.ingredient_img);
 
         Buydate.setText(getDate()); //구매일자 초기 날짜
         Expirationdate.setText(getDate()); //유통기한 초기 날짜
@@ -135,9 +153,21 @@ public class IngredientActivity extends AppCompatActivity {
                 Timestamp ts1 = new Timestamp(time1);
                 Timestamp ts2 = new Timestamp(time2);
                 addFirebase.add_new_ingredient(category, Tradeame.getText().toString(), ts1, null, ts2, storpos);
+                addFirebase.add_picture(camera_btn);
                 Intent intent = new Intent(getApplicationContext(), MyFridge.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        //카메라 버튼
+        camera_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(i, 0);
+
+
             }
         });
     }
@@ -149,4 +179,14 @@ public class IngredientActivity extends AppCompatActivity {
         String getDate = dateFormat.format(date);
         return getDate;
     }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            camera_btn.setImageBitmap(imageBitmap); }
+    }
+
 }
