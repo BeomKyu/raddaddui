@@ -4,6 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/drawable/button_outline.xml" value="0.363" />
+        <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/drawable/radio_button_left_selector.xml" value="0.2835" />
+        <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/drawable/radio_button_left_uncheck.xml" value="0.2835" />
+        <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/drawable/radio_button_letf_check.xml" value="0.2835" />
+        <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/drawable/radio_button_right_checked.xml" value="0.2835" />
+        <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/drawable/radio_button_right_selector.xml" value="0.2835" />
+        <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/drawable/radio_button_right_uncheck.xml" value="0.2835" />
         <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/layout/activity_ingredient.xml" value="0.29257246376811596" />
         <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/layout/activity_loding.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Rice/Desktop/Develop/raddaddui/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
