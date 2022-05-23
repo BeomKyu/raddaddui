@@ -45,11 +45,15 @@ interface MyCallBack{
 interface MyOnceCallBack{
     void onCallback(List<Map<String, Object>> value);
 }
+interface MyPictureCallBack{
+    void onCallback(byte[] bytes);
+}
 
 public class addFirebase {
     private static FirebaseAuth user_instance = FirebaseAuth.getInstance();
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
     static FirebaseStorage storage = FirebaseStorage.getInstance();
+    static StorageReference storageRef = storage.getReference();
     static String TAG="MyTag";
 
     static String tempId;
@@ -123,6 +127,7 @@ public class addFirebase {
                     map.put("Id", doc.getId());
                     map.put("구매일자", doc.getDate("구매일자"));
                     map.put("보관위치", doc.getString("보관위치"));
+
                     Log.d(TAG, String.valueOf(doc.getData()));
                     list.add(map);
                 }
@@ -219,7 +224,7 @@ public class addFirebase {
         StorageReference storageRef = storage.getReference();
         Log.d(TAG, "id" + id);
 // Create a reference to "mountains.jpg"
-        StorageReference imageRef = storageRef.child(user_instance.getUid() + "/" + id + ".jpg");
+        StorageReference imageRef = storageRef.child(user_instance.getUid() + "/" + id + ".jpeg");
         camera_btn.setDrawingCacheEnabled(true);
         camera_btn.buildDrawingCache();
         Bitmap bitmap = ((BitmapDrawable) camera_btn.getDrawable()).getBitmap();
@@ -244,7 +249,23 @@ public class addFirebase {
             }
         });
         // [END upload_memory]
-
-
+    }
+    public static void load_picture(String id, MyPictureCallBack myPictureCallBack){
+        StorageReference pathReference = storageRef.child(user_instance.getUid() +
+                "/" + id + ".jpeg");
+        pathReference.getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Use the bytes to display the image
+                Log.d("Tag", "success");
+                myPictureCallBack.onCallback(bytes);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.d("Tag", "fail");
+                // Handle any errors
+            }
+        });
     }
 }
