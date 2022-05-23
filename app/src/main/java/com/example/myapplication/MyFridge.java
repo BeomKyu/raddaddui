@@ -2,6 +2,10 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -92,9 +96,15 @@ public class MyFridge extends AppCompatActivity {
                         Log.d("MyTag", value.get(i).get("Id").toString());
 
                         String expirationdate = simpleDateFormat.format(value.get(i).get("유통기한"));
-
+                        int picutre = R.drawable.ingredients;
                         if(value.get(i).get("보관위치").toString().equals("냉장")){
-                            IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate, value.get(i).get("Id").toString()));
+                            addFirebase.load_picture(value.get(i).get("Id").toString(), new MyPictureCallBack() {
+                                @Override
+                                public void onCallback(byte[] bytes) {
+
+                                }
+                            });
+                            IngredientDataList.add(new IngredientData(picutre, value.get(i).get("상품명").toString(), expirationdate, value.get(i).get("Id").toString()));
                         }
                         //IngredientDataList.add(new IngredientData(R.drawable.ingredients, value.get(i).get("상품명").toString(), expirationdate));
 

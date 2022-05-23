@@ -264,6 +264,7 @@ public class addFirebase {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 Log.d("Tag", "fail");
+                myPictureCallBack.onCallback(null);
                 // Handle any errors
             }
         });
