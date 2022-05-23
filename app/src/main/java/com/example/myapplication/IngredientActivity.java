@@ -47,6 +47,7 @@ public class IngredientActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_ingredient);
 
         Button Registerbtn = (Button) findViewById(R.id.Registerbtn);  //틍록하기
