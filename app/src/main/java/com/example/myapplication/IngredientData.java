@@ -1,27 +1,27 @@
 package com.example.myapplication;
 
 public class IngredientData {
-    private int img;
+    private String img;
     private String trademark ;
     private String expirationdate;
     private String title;
     private String userId;
 
 
-    public IngredientData(int img, String trademark, String expirationdate, String userId){
+    public IngredientData(String img, String trademark, String expirationdate, String userId){
         this.img = img;
         this.trademark  = trademark;
         this.expirationdate = expirationdate;
         this.userId = userId;
     }
 
-    public IngredientData(int img, String title){
+    public IngredientData(String img, String title){
         this.img = img;
         this.title  = title;
 
     }
 
-    public int getReceipeImg()
+    public String getReceipeImg()
     {
         return this.img;
     }
@@ -31,7 +31,7 @@ public class IngredientData {
         return this.title;
     }
 
-    public int getImg()
+    public String getImg()
     {
         return this.img;
     }

@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class ReceipeListViewAdapter extends BaseAdapter{
@@ -45,7 +47,11 @@ public class ReceipeListViewAdapter extends BaseAdapter{
             ImageView imageView = (ImageView)view.findViewById(R.id.img);
             TextView title = (TextView)view.findViewById(R.id.title);
 
-            imageView.setImageResource(dataArrayList.get(position).getReceipeImg());
+            if(dataArrayList.get(position).getImg().equals("false")){
+                imageView.setImageResource(R.drawable.ingredients);
+            }else {
+                Glide.with(view).load(dataArrayList.get(position).getImg()).into(imageView);
+            }
             title.setText(dataArrayList.get(position).getTitle());
 
             return view;

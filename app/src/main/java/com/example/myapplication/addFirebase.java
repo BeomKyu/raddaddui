@@ -260,8 +260,8 @@ public class addFirebase {
         // [END upload_memory]
     }
     public static void load_picture(String id, MyPictureCallBack myPictureCallBack){
-        StorageReference pathReference = storageRef.child(user_instance.getUid() +
-                "/" + id + ".jpeg");
+        StorageReference pathReference = storageRef.child(user_instance.getUid() + "/" + id + ".jpeg");
+
         pathReference.getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {

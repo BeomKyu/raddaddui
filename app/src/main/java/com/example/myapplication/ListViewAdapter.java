@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {
@@ -42,14 +44,20 @@ public class ListViewAdapter extends BaseAdapter {
         View view = mLayoutInflater.inflate(R.layout.list_view, null);
 
         String userID;
-
         //카테고리, 수량, 보관위치, 구매일자 추가
         ImageView imageView = (ImageView)view.findViewById(R.id.img);
         TextView movieName = (TextView)view.findViewById(R.id.trademark);
         TextView grade = (TextView)view.findViewById(R.id.expirationdate);
         Button delete = (Button)view.findViewById(R.id.delete);
 
-        imageView.setImageResource(dataArrayList.get(position).getImg());
+        if(dataArrayList.get(position).getImg().equals("false")){
+            imageView.setImageResource(R.drawable.ingredients);
+        }else {
+            Glide.with(view).load(dataArrayList.get(position).getImg()).into(imageView);
+        }
+
+
+
         movieName.setText(dataArrayList.get(position).getTrademark());
         grade.setText(dataArrayList.get(position).getExpirationdate());
 

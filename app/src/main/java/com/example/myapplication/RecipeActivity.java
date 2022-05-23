@@ -23,6 +23,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class RecipeActivity extends AppCompatActivity {
@@ -73,9 +74,15 @@ public class RecipeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 RecipeDataList.clear();
                 serch_receipe_with_txt();
-                for(int i = 0; i < rcpList.size(); i++){
-                    RecipeDataList.add(new IngredientData(R.drawable.ingredients, rcpList.get(i).getRCP_NM()));
-                }
+                addFirebase.listen_document_multiple(new MyOnceCallBack() {
+                    @Override
+                    public void onCallback(List<Map<String, Object>> value) {
+                        for(int i = 0; i < rcpList.size(); i++){
+                            RecipeDataList.add(new IngredientData(value.get(i).get("Url").toString(), rcpList.get(i).getRCP_NM()));
+                        }
+                    }
+                });
+
             }
         });
 
