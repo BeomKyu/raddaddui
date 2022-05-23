@@ -70,6 +70,7 @@ public class addFirebase {
         user.put("유통기한", expiration_date);
         user.put("구매일자", purchase_date);
         user.put("보관위치", storage_location);
+        user.put("Url", "false");
 
         if(Id == null) {
             db.collection("user").document(user_instance.getUid())
@@ -127,6 +128,7 @@ public class addFirebase {
                     map.put("Id", doc.getId());
                     map.put("구매일자", doc.getDate("구매일자"));
                     map.put("보관위치", doc.getString("보관위치"));
+                    map.put("Url", doc.getString("Url"));
 
                     Log.d(TAG, String.valueOf(doc.getData()));
                     list.add(map);
@@ -243,6 +245,13 @@ public class addFirebase {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Map<String, Object> user = new HashMap<>();
+                user.put("Url", "https://firebasestorage.googleapis.com/v0/b/rada-b8814.appspot.com/o/"
+                        + user_instance.getUid() + "%2F" +
+                        id + ".jpeg?alt=media");
+                db.collection("user").document(user_instance.getUid())
+                        .collection("ingredient").document(id)
+                        .set(user, SetOptions.merge());
                 Log.d(TAG, "success");
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 // ...
