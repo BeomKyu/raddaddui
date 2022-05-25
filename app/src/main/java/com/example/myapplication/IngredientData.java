@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 public class IngredientData {
+    private String receipeimg;
     private String img;
     private String trademark ;
     private String expirationdate;
@@ -15,15 +16,15 @@ public class IngredientData {
         this.userId = userId;
     }
 
-    public IngredientData(String img, String title){
-        this.img = img;
+    public IngredientData(String getReceipeImg, String title){
+        this.receipeimg = getReceipeImg;
         this.title  = title;
 
     }
 
     public String getReceipeImg()
     {
-        return this.img;
+        return this.receipeimg;
     }
 
     public String getTitle()

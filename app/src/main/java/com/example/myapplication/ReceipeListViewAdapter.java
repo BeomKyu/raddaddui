@@ -44,14 +44,12 @@ public class ReceipeListViewAdapter extends BaseAdapter{
             View view = mLayoutInflater.inflate(R.layout.receipe_list_view, null);
 
             //카테고리, 수량, 보관위치, 구매일자 추가
-            ImageView imageView = (ImageView)view.findViewById(R.id.img);
+            ImageView imageView = (ImageView)view.findViewById(R.id.receipeimg);
             TextView title = (TextView)view.findViewById(R.id.title);
 
-            if(dataArrayList.get(position).getImg().equals("false")){
-                imageView.setImageResource(R.drawable.ingredients);
-            }else {
-                Glide.with(view).load(dataArrayList.get(position).getImg()).into(imageView);
-            }
+            Glide.with(view).load(dataArrayList.get(position).getReceipeImg()).into(imageView);
+
+
             title.setText(dataArrayList.get(position).getTitle());
 
             return view;

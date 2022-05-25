@@ -31,6 +31,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class IngredientActivity extends AppCompatActivity {
@@ -38,6 +39,10 @@ public class IngredientActivity extends AppCompatActivity {
     String category; //카테고리
     String storpos; //저장위치
     ImageButton camera_btn; //카메라 버튼 및 이미지 미리보기 뷰
+
+    int year = Calendar.getInstance().get(Calendar.YEAR);
+    int month = Calendar.getInstance().get(Calendar.MONTH);
+    int dayofmonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
     final static int TAKE_PICTURE = 1;
 
@@ -112,7 +117,7 @@ public class IngredientActivity extends AppCompatActivity {
 
         };
 
-        DatePickerDialog buydatePickerDialog = new DatePickerDialog(this, buydateSetListener, 2022, 1, 1);
+        DatePickerDialog buydatePickerDialog = new DatePickerDialog(this, buydateSetListener, year, month, dayofmonth);
 
         Buy_date_picker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +136,7 @@ public class IngredientActivity extends AppCompatActivity {
 
         };
 
-        DatePickerDialog epddatePickerDialog = new DatePickerDialog(this, epddateSetListener, 2022, 1, 1);
+        DatePickerDialog epddatePickerDialog = new DatePickerDialog(this, epddateSetListener, year, month, dayofmonth);
 
         Epd_Date_picker.setOnClickListener(new View.OnClickListener() {
             @Override

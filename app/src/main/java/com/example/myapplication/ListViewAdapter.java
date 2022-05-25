@@ -56,8 +56,6 @@ public class ListViewAdapter extends BaseAdapter {
             Glide.with(view).load(dataArrayList.get(position).getImg()).into(imageView);
         }
 
-
-
         movieName.setText(dataArrayList.get(position).getTrademark());
         grade.setText(dataArrayList.get(position).getExpirationdate());
 

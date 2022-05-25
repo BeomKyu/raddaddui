@@ -9,9 +9,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.google.protobuf.StringValue;
@@ -32,7 +34,6 @@ public class RecipeActivity extends AppCompatActivity {
     EditText serch_txt;
     String resultTxt = "";
     Boolean aBoolean = false;
-    TextView textView123;
     List<receipe> rcpList = new ArrayList();
     ArrayList<IngredientData> RecipeDataList;
 
@@ -48,9 +49,13 @@ public class RecipeActivity extends AppCompatActivity {
 
         receipe_listView.setAdapter(listViewAdapter);
 
+
+
         serch_btn = (Button)findViewById(R.id.receipe_serch);
         serch_txt = (EditText)findViewById(R.id.receipe_serch_txt);
         serch_txt.setTextColor(Color.BLACK);
+
+
 
         serch_txt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -78,7 +83,7 @@ public class RecipeActivity extends AppCompatActivity {
                     @Override
                     public void onCallback(List<Map<String, Object>> value) {
                         for(int i = 0; i < rcpList.size(); i++){
-                            RecipeDataList.add(new IngredientData(value.get(i).get("Url").toString(), rcpList.get(i).getRCP_NM()));
+                            RecipeDataList.add(new IngredientData(rcpList.get(i).getATT_FILE_NO_MAIN(), rcpList.get(i).getRCP_NM()));
                         }
                     }
                 });
