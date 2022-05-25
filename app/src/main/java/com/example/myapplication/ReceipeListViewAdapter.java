@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +48,8 @@ public class ReceipeListViewAdapter extends BaseAdapter{
             ImageView imageView = (ImageView)view.findViewById(R.id.receipeimg);
             TextView title = (TextView)view.findViewById(R.id.title);
 
-            Glide.with(view).load(dataArrayList.get(position).getReceipeImg()).into(imageView);
-
-
+            Glide.with(view).load(dataArrayList.get(position).getReceipeImg()).fitCenter().into(imageView);
+            Log.d("Tag", dataArrayList.get(position).getReceipeImg());
             title.setText(dataArrayList.get(position).getTitle());
 
             return view;

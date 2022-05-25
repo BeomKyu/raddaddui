@@ -83,7 +83,7 @@ public class RecipeActivity extends AppCompatActivity {
                     @Override
                     public void onCallback(List<Map<String, Object>> value) {
                         for(int i = 0; i < rcpList.size(); i++){
-                            RecipeDataList.add(new IngredientData(rcpList.get(i).getATT_FILE_NO_MAIN(), rcpList.get(i).getRCP_NM()));
+                            RecipeDataList.add(new IngredientData(rcpList.get(i).getATT_FILE_NO_MK(), rcpList.get(i).getRCP_NM()));
                         }
                     }
                 });
