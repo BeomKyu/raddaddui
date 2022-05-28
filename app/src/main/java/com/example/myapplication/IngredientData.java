@@ -7,6 +7,7 @@ public class IngredientData {
     private String expirationdate;
     private String title;
     private String userId;
+    private String[] manual;
 
 
     public IngredientData(String img, String trademark, String expirationdate, String userId){
@@ -16,10 +17,14 @@ public class IngredientData {
         this.userId = userId;
     }
 
-    public IngredientData(String getReceipeImg, String title){
+    public IngredientData(String getReceipeImg, String title, String[] manual){
         this.receipeimg = getReceipeImg;
         this.title  = title;
+        this.manual = manual;
 
+    }
+    public String[] getManual(){
+        return  this.manual;
     }
 
     public String getReceipeImg()

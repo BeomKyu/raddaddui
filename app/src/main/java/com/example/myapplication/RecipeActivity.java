@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.ims.RcsUceAdapter;
@@ -9,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +36,7 @@ public class RecipeActivity extends AppCompatActivity {
     EditText serch_txt;
     String resultTxt = "";
     Boolean aBoolean = false;
-    List<receipe> rcpList = new ArrayList();
+    ArrayList<receipe> rcpList = new ArrayList();
     ArrayList<IngredientData> RecipeDataList;
 
     @Override
@@ -83,11 +85,23 @@ public class RecipeActivity extends AppCompatActivity {
                     @Override
                     public void onCallback(List<Map<String, Object>> value) {
                         for(int i = 0; i < rcpList.size(); i++){
-                            RecipeDataList.add(new IngredientData(rcpList.get(i).getATT_FILE_NO_MK(), rcpList.get(i).getRCP_NM()));
+                            RecipeDataList.add(new IngredientData(rcpList.get(i).getATT_FILE_NO_MK(), rcpList.get(i).getRCP_NM(), rcpList.get(i).getMANUAL()));
                         }
                     }
                 });
 
+            }
+        });
+
+        receipe_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), Recipemain.class);
+                /* putExtra의 첫 값은 식별 태그, 뒤에는 다음 화면에 넘길 값 */
+                intent.putExtra("RecipeID", RecipeDataList.get(position).getTitle());
+                intent.putExtra("RecipeImg", RecipeDataList.get(position).getReceipeImg());
+
+                startActivity(intent);
             }
         });
 
