@@ -85,7 +85,7 @@ public class RecipeActivity extends AppCompatActivity {
                     @Override
                     public void onCallback(List<Map<String, Object>> value) {
                         for(int i = 0; i < rcpList.size(); i++){
-                            RecipeDataList.add(new IngredientData(rcpList.get(i).getATT_FILE_NO_MK(), rcpList.get(i).getRCP_NM(), rcpList.get(i).getMANUAL()));
+                            RecipeDataList.add(new IngredientData(rcpList.get(i).getATT_FILE_NO_MK(), rcpList.get(i).getRCP_NM(), rcpList.get(i).getMANUAL(), rcpList.get(i).getRCP_PARTS_DTLS()));
                         }
                     }
                 });
@@ -100,7 +100,8 @@ public class RecipeActivity extends AppCompatActivity {
                 /* putExtra의 첫 값은 식별 태그, 뒤에는 다음 화면에 넘길 값 */
                 intent.putExtra("RecipeID", RecipeDataList.get(position).getTitle());
                 intent.putExtra("RecipeImg", RecipeDataList.get(position).getReceipeImg());
-
+                intent.putExtra("manual", RecipeDataList.get(position).getManual());
+                intent.putExtra("partslist", RecipeDataList.get(position).getPartslist());
                 startActivity(intent);
             }
         });

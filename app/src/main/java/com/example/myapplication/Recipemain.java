@@ -15,11 +15,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class Recipemain extends AppCompatActivity {
 
-    String Title;
-
+    String[] manuallist;
+    String testlist = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,19 @@ public class Recipemain extends AppCompatActivity {
 
         TextView recipetitle = (TextView)findViewById(R.id.recipetitle);
         TextView manual = (TextView)findViewById(R.id.manual);
+        TextView partslist = (TextView)findViewById(R.id.partslist);
         ImageView receipeImg = (ImageView)findViewById(R.id.receipeImg);
 
+        manuallist = intent.getStringArrayExtra("manual");
         recipetitle.setText(intent.getStringExtra("RecipeID"));
-        Glide.with(this).load(intent.getStringExtra("RecipeImg")).fitCenter().into(receipeImg);
+        Glide.with(this).load(intent.getStringExtra("RecipeImg")).override(800, 800).fitCenter().into(receipeImg);
 
+        for(int i = 0; i < manuallist.length; i++){
+            testlist += manuallist[i] + "\n";
+        }
+
+        partslist.setText(intent.getStringExtra("partslist"));
+        manual.setText(testlist);
 
     }
 
