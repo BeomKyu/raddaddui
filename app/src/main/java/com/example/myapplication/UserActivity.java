@@ -38,11 +38,10 @@ public class UserActivity extends AppCompatActivity {
 //                revokeAccess();
                 addFirebase.delete_user_all_document();
                 revokeAccess();
-                Intent intent = new Intent(getApplicationContext(), SigninActivity.class);
 
-                startActivity(intent);
-
-                finish();
+                moveTaskToBack(true);
+                finishAndRemoveTask();
+                System.exit(0);
             }
         });
         Signoutbtn.setOnClickListener(new View.OnClickListener() {
